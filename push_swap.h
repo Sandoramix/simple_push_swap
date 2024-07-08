@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 19:07:20 by odudniak          #+#    #+#             */
-/*   Updated: 2024/07/08 16:41:16 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/07/08 18:51:51 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdbool.h>
+# include <limits.h>
 
 //MOVES-------------------------------------------------------------------------
 # define PA "pa\n"
@@ -35,10 +36,26 @@
 # define SS "ss\n"
 //------------------------------------------------------------------------------
 
+typedef struct s_nextplace
+{
+	struct s_list	*next_bigger;
+	int				next_idx;
+	size_t			next_rot;
+	size_t			next_revrot;
+
+	size_t			rot;
+	size_t			revrot;
+
+	size_t			totmoves;
+
+}	t_nextplace;
+
 typedef struct s_list
 {
 	int				val;
 	struct s_list	*next;
+
+	t_nextplace		target;
 }	t_list;
 
 //BASE UTILS
@@ -65,8 +82,12 @@ bool	lst_issorted(t_list *lst);
 
 
 // PUSH_SWAP MOVES
-bool	ps_revrot(t_list **stack, char *move);
 bool	ps_rot(t_list **stack, char *move);
+bool	ps_revrot(t_list **stack, char *move);
+
+bool	ps_rotall(t_list **a, t_list **b, char *move);
+bool	ps_revrotall(t_list **a, t_list **b, char *move);
+
 bool	ps_swap(t_list **stack, char *move);
 bool	ps_push(t_list **from, t_list **to, char *move);
 
@@ -76,4 +97,15 @@ t_list	*parse(int ac, char **av);
 bool	is_just_a_number(char *s);
 int		ft_atoi(char *s);
 
+// SOLVE
+bool	solve3(t_list **a);
+void	solve(t_list **a, t_list **b);
+
+//BRAIN UTILS
+void	update_next_move(t_list *a, t_list *b);
+void	execute_fastest(t_list **a, t_list **b);
+
+// PUSH_SWAP UTILS
+t_list	*best_target(t_list *b);
+int		ps_findnext_bigger(t_list *curr, t_list *other_stack);
 #endif

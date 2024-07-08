@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 19:54:45 by odudniak          #+#    #+#             */
-/*   Updated: 2024/07/08 17:58:35 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/07/08 18:41:18 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,15 @@ bool	ps_rot(t_list **stack, char *move)
 	return (true);
 }
 
+bool	ps_rotall(t_list **a, t_list **b, char *move)
+{
+	if (move)
+		write(1, move, str_len(move));
+	ps_rot(a, NULL);
+	ps_rot(b, NULL);
+	return (true);
+}
+
 bool	ps_revrot(t_list **stack, char *move)
 {
 	t_list	*prelast;
@@ -61,6 +70,15 @@ bool	ps_revrot(t_list **stack, char *move)
 	prelast->next = NULL;
 	*stack = last;
 	last->next = head;
+	return (true);
+}
+
+bool	ps_revrotall(t_list **a, t_list **b, char *move)
+{
+	if (move)
+		write(1, move, str_len(move));
+	ps_revrot(a, NULL);
+	ps_revrot(b, NULL);
 	return (true);
 }
 
