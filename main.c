@@ -6,25 +6,11 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 19:23:32 by odudniak          #+#    #+#             */
-/*   Updated: 2024/07/08 18:47:53 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/07/08 19:00:02 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	print(t_list *a)
-{
-	int		i;
-
-	i = -1;
-	while (a)
-	{
-		printf("[%d]: [%d] (next: {idx[%d]; val[%d]})\n", ++i, a->val,
-			a->target.next_idx,
-			a->target.next_bigger ? a->target.next_bigger->val : 0);
-		a = a->next;
-	}
-}
 
 int	main(int ac, char **av)
 {

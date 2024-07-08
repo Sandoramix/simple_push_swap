@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 17:07:58 by odudniak          #+#    #+#             */
-/*   Updated: 2024/07/08 18:50:50 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/07/08 19:14:35 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ void	update_next_move(t_list *a, t_list *b)
 	while (++i < bsize)
 	{
 		b->target.rot = i;
-		b->target.revrot = bsize - i;
+		b->target.revrot = bsize - i - 1;
 		if (ps_findnext_bigger(b, a) == -1)
 			set_min_as_target(b, a);
 		b->target.next_rot = b->target.next_idx;
-		b->target.next_revrot = asize - b->target.next_idx;
+		b->target.next_revrot = asize - b->target.next_idx - 1;
 		b->target.totmoves = b->target.next_revrot;
 		if (b->target.next_rot < b->target.next_revrot)
 			b->target.totmoves = b->target.next_rot;
@@ -56,16 +56,18 @@ void	update_next_move(t_list *a, t_list *b)
 		b = b->next;
 	}
 }
-
+// NOT WORKING YET
 void	combine_move(t_list **a, t_list **b, t_list *best)
 {
 	size_t	common_rot;
 	size_t	common_revrot;
 
 	common_rot = (int [2]){best->target.rot, best->target.next_rot}
-	[best->target.next_rot < best->target.rot];
+	[best->target.next_rot > best->target.rot];
 	common_revrot = (int [2]){best->target.revrot, best->target.next_revrot}
-	[best->target.next_revrot < best->target.revrot];
+	[best->target.next_revrot > best->target.revrot];
+	if (common_rot == 0 && common_revrot == 0)
+		return ;
 	if (common_rot > common_revrot)
 	{
 		best->target.rot -= common_rot;
@@ -87,7 +89,7 @@ void	execute_fastest(t_list **a, t_list **b)
 	t_list	*best;
 
 	best = best_target(*b);
-	combine_move(a, b, best);
+	//combine_move(a, b, best);
 	if (best->target.rot < best->target.revrot)
 		while (best->target.rot-- > 0)
 			ps_rot(b, RB);
