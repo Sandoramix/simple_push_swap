@@ -4,7 +4,9 @@ CC=cc
 CFLAGS=-g -Wall -Wextra -Werror -I.
 RM=rm -f
 
-SRC=base_utils.c lst_utils.c parsing_utils.c ps_moves.c ft_atoi.c ft_split.c main.c
+SRC= main.c \
+	utils_base.c utils_ft_atoi.c utils_ft_split.c utils_lst.c \
+	ps_parsing.c ps_moves.c
 
 all: $(NAME)
 

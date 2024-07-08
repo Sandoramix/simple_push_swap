@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 19:23:32 by odudniak          #+#    #+#             */
-/*   Updated: 2024/07/08 16:42:31 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/07/08 16:53:15 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,18 @@ bool	solve3(t_list **a)
 	return (true);
 }
 
+typedef struct s_newplace
+{
+	t_list	*target;
+	
+}	t_newplace;
+
 void	*solve(t_list **a, t_list **b)
 {
 	int		a_len;
 
 	a_len = lst_size(*a);
-	while (a_len > 3)
+	while (a_len > 3 && !lst_issorted(*a))
 	{
 		ps_push(a, b, PB);
 		a_len--;
