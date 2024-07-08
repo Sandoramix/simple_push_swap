@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 18:10:39 by odudniak          #+#    #+#             */
-/*   Updated: 2024/07/08 18:51:46 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/07/08 19:52:49 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,30 @@ bool	solve3(t_list **a)
 	return (true);
 }
 
+static void	move_min_to_top(t_list **stack_a)
+{
+	t_list	*min;
+	t_list	*tmp;
+	int		idx;
+	int		stack_a_size;
+
+	idx = -1;
+	tmp = *stack_a;
+	min = lst_getmin(*stack_a);
+	stack_a_size = lst_size(*stack_a);
+	while (tmp && ++idx > -1)
+	{
+		if (tmp == min)
+			break ;
+		tmp = tmp->next;
+	}
+	if (idx <= stack_a_size / 2)
+		while (idx-- > 0)
+			ps_rot(stack_a, RA);
+	else
+		while (stack_a_size - idx++ > 0)
+			ps_revrot(stack_a, RRA);
+}
 
 void	solve(t_list **a, t_list **b)
 {
@@ -53,4 +77,5 @@ void	solve(t_list **a, t_list **b)
 		update_next_move(*a, *b);
 		execute_fastest(a, b);
 	}
+	move_min_to_top(a);
 }
