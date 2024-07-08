@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 18:48:13 by odudniak          #+#    #+#             */
-/*   Updated: 2024/07/08 18:49:34 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/07/08 19:03:41 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_list	*best_target(t_list *b)
 	best = b;
 	while (b)
 	{
-		if (best->target.totmoves < b->target.totmoves)
+		if (best->target.totmoves > b->target.totmoves)
 			best = b;
 		b = b->next;
 	}
