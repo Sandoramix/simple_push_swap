@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 19:54:45 by odudniak          #+#    #+#             */
-/*   Updated: 2024/07/08 18:41:18 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/07/08 19:12:49 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ bool	ps_push(t_list **from, t_list **to, char *move)
 {
 	t_list	*node;
 
+	if (!from || ! to)
+		return (false);
 	if (move)
 		write(1, move, str_len(move));
 	if (!from || lst_size(*from) == 0)
@@ -93,6 +95,12 @@ bool	ps_push(t_list **from, t_list **to, char *move)
 	node = *from;
 	*from = (*from)->next;
 	node->next = NULL;
-	lst_addnode_back(to, node);
+	if (!*to)
+		*to = node;
+	else
+	{
+		node->next = *to;
+		*to = node;
+	}
 	return (true);
 }
