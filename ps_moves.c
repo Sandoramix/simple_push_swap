@@ -6,7 +6,7 @@
 /*   By: odudniak <odudniak@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/07 19:54:45 by odudniak          #+#    #+#             */
-/*   Updated: 2024/07/07 21:57:21 by odudniak         ###   ########.fr       */
+/*   Updated: 2024/07/08 17:58:35 by odudniak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ bool	ps_rot(t_list **stack, char *move)
 
 bool	ps_revrot(t_list **stack, char *move)
 {
+	t_list	*prelast;
 	t_list	*last;
 	t_list	*head;
 
@@ -53,7 +54,11 @@ bool	ps_revrot(t_list **stack, char *move)
 	if (!stack || lst_size(*stack) < 2)
 		return (false);
 	head = *stack;
+	prelast = *stack;
+	while (prelast && prelast->next && prelast->next->next)
+		prelast = prelast->next;
 	last = lst_gettail(*stack);
+	prelast->next = NULL;
 	*stack = last;
 	last->next = head;
 	return (true);
