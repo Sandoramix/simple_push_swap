@@ -29,27 +29,26 @@ t_list	*best_target(t_list *b)
 t_list	*ps_findnext_bigger(t_list *curr, t_list *stack)
 {
 	const int		val = curr->val;
-	int				res;
 	int				i;
 
 	curr->target.next_bigger = stack;
+	curr->target.next_idx = -1;
 	stack = stack->next;
 	i = 0;
-	res = -1;
 	if (curr->target.next_bigger->val > curr->val)
-		res = i;
+		curr->target.next_idx = i;
 	while (stack && ++i)
 	{
 		if (stack->val > val
-			&& (res == -1 || (stack->val < curr->target.next_bigger->val)))
+			&& (curr->target.next_idx == -1
+					|| (stack->val < curr->target.next_bigger->val)))
 		{
 			curr->target.next_bigger = stack;
-			res = i;
-			curr->target.next_idx = res;
+			curr->target.next_idx = i;
 		}
 		stack = stack->next;
 	}
-	if (res == -1)
+	if (curr->target.next_idx == -1)
 		curr->target.next_bigger = NULL;
 	return (curr->target.next_bigger);
 }
