@@ -66,7 +66,6 @@ int		str_len(char *s);
 char	**ft_split(char *s);
 int		*sort_int_array(int *arr, int size);
 
-
 // LIST UTILS
 //			BASIC
 int		lst_size(t_list *lst);
