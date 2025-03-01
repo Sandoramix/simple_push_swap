@@ -69,6 +69,56 @@ int	lst_size(t_list *lst)
 	return (size);
 }
 
+int *lst_to_array(t_list *lst)
+{
+	const int	size = lst_size(lst);
+	int			*arr;
+	int			i;
+
+	arr = ft_calloc(size, sizeof(int));
+	if (!arr)
+		return (NULL);
+	i = -1;
+	while (lst)
+	{
+		arr[++i] = lst->val;
+		lst = lst->next;
+	}
+	return (arr);
+}
+
+int	lst_avg(t_list *lst)
+{
+	int	sum;
+	int	size;
+
+	sum = 0;
+	size = 0;
+	if (!lst)
+		return (0);
+	while (lst)
+	{
+		sum += lst->val;
+		size++;
+		lst = lst->next;
+	}
+	return (sum / size);
+}
+
+int	lst_middle_val(t_list *lst)
+{
+	const int	size = lst_size(lst);
+	int			*arr;
+	int			res;
+
+	arr = lst_to_array(lst);
+	if (!arr)
+		return (lst_avg(lst));
+	arr = sort_int_array(arr, size);
+	res = arr[size / 2];
+	return (free(arr), res);
+}
+
 // USEFUL FOR PUSH_SWAP
 
 void	lst_print(t_list *lst)

@@ -72,3 +72,26 @@ int	str_len(char *s)
 		i++;
 	return (i);
 }
+
+int	*sort_int_array(int *arr, int size)
+{
+	int	i;
+	int	j;
+	int	tmp;
+
+	i = -1;
+	while (++i < size)
+	{
+		j = i;
+		while (++j < size)
+		{
+			if (arr[i] > arr[j])
+			{
+				tmp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = tmp;
+			}
+		}
+	}
+	return (arr);
+}

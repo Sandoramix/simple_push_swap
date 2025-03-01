@@ -64,7 +64,7 @@ void	*lst_free(t_list **head);
 void	*mtx_free(char ***mtx_p);
 int		str_len(char *s);
 char	**ft_split(char *s);
-
+int		*sort_int_array(int *arr, int size);
 
 
 // LIST UTILS
@@ -79,7 +79,8 @@ void	lst_print(t_list *lst);
 t_list	*lst_findval(t_list *lst, int val);
 t_list	*lst_getmin(t_list *lst);
 bool	lst_issorted(t_list *lst);
-
+int		lst_avg(t_list *lst);
+int		lst_middle_val(t_list *lst);
 
 // PUSH_SWAP MOVES
 bool	ps_rot(t_list **stack, char *move);
