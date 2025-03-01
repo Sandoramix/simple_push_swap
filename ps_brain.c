@@ -42,7 +42,7 @@ void	update_next_move(t_list *a, t_list *b)
 	{
 		b->target.rot = i;
 		b->target.revrot = bsize - i;
-		if (ps_findnext_bigger(b, a) == -1)
+		if (ps_findnext_bigger(b, a) == NULL)
 			set_min_as_target(b, a);
 		b->target.next_rot = b->target.next_idx;
 		b->target.next_revrot = asize - b->target.next_idx;

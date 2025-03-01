@@ -108,5 +108,5 @@ void	execute_fastest(t_list **a, t_list **b);
 
 // PUSH_SWAP UTILS
 t_list	*best_target(t_list *b);
-int		ps_findnext_bigger(t_list *curr, t_list *other_stack);
+t_list	*ps_findnext_bigger(t_list *curr, t_list *other_stack);
 #endif

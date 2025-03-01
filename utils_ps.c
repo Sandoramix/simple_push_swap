@@ -26,30 +26,30 @@ t_list	*best_target(t_list *b)
 	return (best);
 }
 
-int	ps_findnext_bigger(t_list *curr, t_list *other_stack)
+t_list	*ps_findnext_bigger(t_list *curr, t_list *other_stack)
 {
 	const int		val = curr->val;
-	t_list			*cur;
 	int				res;
 	int				i;
 
-	cur = other_stack;
+	curr->target.next_bigger = other_stack;
 	other_stack = other_stack->next;
 	i = 0;
 	res = -1;
-	if (cur->val > curr->val)
+	if (curr->target.next_bigger->val > curr->val)
 		res = i;
 	while (other_stack && ++i)
 	{
 		if (other_stack->val > val
-			&& (res == -1 || (other_stack->val < cur->val)))
+			&& (res == -1 || (other_stack->val < curr->target.next_bigger->val)))
 		{
-			cur = other_stack;
+			curr->target.next_bigger = other_stack;
 			res = i;
+			curr->target.next_idx = res;
 		}
 		other_stack = other_stack->next;
 	}
-	curr->target.next_bigger = cur;
-	curr->target.next_idx = res;
-	return (res);
+	if (res == -1)
+		curr->target.next_bigger = NULL;
+	return (curr->target.next_bigger);
 }
